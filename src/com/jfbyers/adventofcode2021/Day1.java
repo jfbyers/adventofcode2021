@@ -32,7 +32,7 @@ public class Day1 {
                 increases++;
             }
         }
-        return +increases;
+        return increases;
     }
 
 
