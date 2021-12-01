@@ -17,7 +17,7 @@ public class Day1 {
     }
 
     private static int compute(List<Integer> measurements, int windowSize) {
-        int increases = 0, previous = 0, item;
+        int increases = 0, item, previous =  measurements.subList(0, windowSize).stream().reduce(0, Integer::sum);
         for (int i = 1; i <= measurements.size() - windowSize; i++, previous = item) {
             item = measurements.subList(i, i + windowSize).stream().reduce(0, Integer::sum);
             if (item > previous) {
