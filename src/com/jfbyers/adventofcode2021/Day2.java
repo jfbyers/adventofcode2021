@@ -16,14 +16,14 @@ public class Day2 {
         int horizontal = 0,  depth = 0 , aim = 0;
         for (Instruction i : PROGRAM){
             switch (i.op){
-                case FORWARD:
+                case "forward":
                     horizontal += i.units;
                     depth += aim * i.units;
                     break;
-                case DOWN:
+                case "down":
                     aim += i.units;
                     break;
-                case UP:
+                case "up":
                     aim -= i.units;
                     break;
             }
@@ -43,22 +43,13 @@ public class Day2 {
         return Collections.emptyList();
     }
 
-
-    private enum Operand {
-        FORWARD, DOWN, UP;
-
-        public static Operand fromString(String s) {
-            return Operand.valueOf(s.toUpperCase());
-        }
-    }
-
     private static class Instruction {
-        Operand op;
+        String op;
         int units;
 
-        public Instruction(String s, String s1) {
-            this.op = Operand.fromString(s);
-            this.units = Integer.valueOf(s1);
+        public Instruction(String operand, String units) {
+            this.op = operand;
+            this.units = Integer.valueOf(units);
         }
     }
 }
