@@ -21,7 +21,7 @@ public class Day3 {
         char[] gamma = new char[WORD_LENGTH] , epsilon = new char[WORD_LENGTH];
         List<String> currentNumbers = Arrays.asList(DIAGNOSTIC_REPORT);
         for (int i = 0; i < WORD_LENGTH; i++) {
-            Character[] binaryWord = getBinaryWordAtColumn(i,currentNumbers);
+            char[] binaryWord = getBinaryWordAtColumn(i,currentNumbers);
             final char frequencyChar = getHigherFrequency(binaryWord);
             gamma[i] = frequencyChar;
             epsilon[i] = frequencyChar == '0' ? '1' : '0';
@@ -41,9 +41,9 @@ public class Day3 {
         System.out.println("Part 2: " + co2Value * oxygenValue);
     }
 
-    private static String extractRating(List<String> currentNumbers, int index, Function<Character[],Character> frequencyCharCriteria) {
+    private static String extractRating(List<String> currentNumbers, int index, Function<char[],Character> frequencyCharCriteria) {
         for (int k = 0; k < currentNumbers.size(); k++) {
-            Character[] binaryWord = getBinaryWordAtColumn(index,currentNumbers);
+            char[] binaryWord = getBinaryWordAtColumn(index,currentNumbers);
             final char frequencyChar = frequencyCharCriteria.apply(binaryWord);
             List<String> filterNumbers = currentNumbers.stream()
                     .filter(s -> s.charAt(index)== frequencyChar).collect(Collectors.toList());
@@ -53,8 +53,8 @@ public class Day3 {
         return null;
     }
 
-    private static Character[] getBinaryWordAtColumn(int i,List<String> currentNumbers) {
-        Character[] binaryWord = new Character[currentNumbers.size()];
+    private static char[] getBinaryWordAtColumn(int i,List<String> currentNumbers) {
+        char[] binaryWord = new char[currentNumbers.size()];
         for (int k = 0; k < currentNumbers.size(); k++) {
             String binaryNumber = currentNumbers.get(k);
             binaryWord[k] = binaryNumber.charAt(i);
@@ -62,11 +62,11 @@ public class Day3 {
         return binaryWord;
     }
 
-    private static char getLowerFrequency(Character[] binaryWord) {
+    private static char getLowerFrequency(char[] binaryWord) {
         return getHigherFrequency(binaryWord) == '0' ? '1' : '0';
     }
 
-    private static char getHigherFrequency(Character[] binaryWord) {
+    private static char getHigherFrequency(char[] binaryWord) {
         Map<Character, Long> frequency = getFrequency(binaryWord);
 
         if (frequency.get('0') > frequency.get('1')) {
@@ -76,11 +76,7 @@ public class Day3 {
         }
     }
 
-    private static Map<Character, Long> getFrequency(Character[] binaryWord) {
-        char[] binaryWordArray = Arrays.stream(binaryWord)
-                .map(ch -> ch.toString())
-                .collect(Collectors.joining())
-                .toCharArray();
+    private static Map<Character, Long> getFrequency(char[] binaryWordArray) {
         return CharBuffer.wrap(binaryWordArray).chars() .mapToObj(c -> (char) c)
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
