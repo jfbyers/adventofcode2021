@@ -19,9 +19,12 @@ public class Day4 {
 
         Board winningBoard = boardsPlays.firstEntry().getValue();
         Integer numberCalled = numbers.get(boardsPlays.firstKey());
+        //part 1
         resolve(winningBoard, numberCalled);
         Board lastWinningBoard = boardsPlays.lastEntry().getValue();
         Integer lastNumberCalled = numbers.get(boardsPlays.lastKey());
+
+        // part 2
         resolve(lastWinningBoard, lastNumberCalled);
 
     }
